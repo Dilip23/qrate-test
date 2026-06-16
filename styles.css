@@ -502,65 +502,131 @@ img {
 }
 
 /* --------------------------------------------------
-   WHY CHOOSE US SECTION
+   BLOGS SECTION
 -------------------------------------------------- */
-.why-choose-us {
+.blogs-section {
     padding: var(--section-padding);
     background-color: var(--white);
+    position: relative;
+    overflow: hidden;
 }
 
-.wcu-header {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto 4rem;
+.blogs-section::before {
+    content: "";
+    position: absolute;
+    top: 8%;
+    right: -12%;
+    width: 38vw;
+    height: 38vw;
+    background: radial-gradient(circle, rgba(107,197,154,0.12) 0%, rgba(51,193,204,0.06) 55%, rgba(255,255,255,0) 72%);
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
 }
 
-.wcu-header h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+.blogs-container {
+    position: relative;
+    z-index: 1;
 }
 
-.wcu-grid {
+.blogs-header {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    grid-template-columns: 1fr minmax(280px, 520px);
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 4rem;
 }
 
-.wcu-card {
+.blogs-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+.blogs-header p {
+    font-size: 1.125rem;
+    margin: 0;
+}
+
+.blogs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.blog-card {
     background: var(--white);
-    padding: 3rem 2rem;
     border-radius: var(--radius);
     border: 1px solid rgba(0,84,108,0.05);
     box-shadow: var(--shadow-premium);
+    overflow: hidden;
     transition: var(--transition-smooth);
-    text-align: left;
+    display: flex;
+    flex-direction: column;
 }
 
-.wcu-card:hover {
+.blog-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-hover);
     border-color: rgba(51,193,204,0.3);
 }
 
-.wcu-card .icon {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    display: inline-block;
-    padding: 1rem;
-    background: rgba(107,197,154,0.1);
-    border-radius: var(--radius-sm);
-    color: var(--primary);
+.featured-blog {
+    border-color: rgba(107,197,154,0.28);
 }
 
-.wcu-card h3 {
-    font-size: 1.25rem;
+.blog-image {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+.blog-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.blog-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.blog-card h3 {
+    font-size: 1.35rem;
     margin-bottom: 1rem;
     color: var(--primary);
 }
 
-.wcu-card p {
+.blog-card p {
     font-size: 1rem;
-    margin: 0;
+    margin-bottom: 1.5rem;
+}
+
+.blog-link {
+    margin-top: auto;
+    color: var(--highlight);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.blog-link:hover {
+    color: var(--primary);
+}
+
+.blogs-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
 }
 
 /* --------------------------------------------------
@@ -704,7 +770,9 @@ img {
 @media (max-width: 1024px) {
     .hero-title { font-size: 2.8rem; }
     .hero-container, .ps-container { gap: 3rem; }
-    .wcu-grid { grid-template-columns: repeat(2, 1fr); }
+    .blogs-header { gap: 2.5rem; }
+    .blogs-grid { grid-template-columns: repeat(2, 1fr); }
+    .featured-blog { grid-column: span 2; }
     .footer-top { grid-template-columns: 1fr 1fr; }
 }
 
@@ -785,18 +853,42 @@ img {
     }
 
     /* Typography & Sections */
-    .ps-content h2, .product-title, .final-cta h2, .wcu-header h2 { 
+    .ps-content h2, .product-title, .final-cta h2, .blogs-header h2 { 
         font-size: 2rem; 
     }
-    
-    .wcu-grid { 
+
+    .blogs-header {
         grid-template-columns: 1fr; 
-        gap: 1.5rem; 
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        text-align: center;
     }
-    
-    .wcu-card { 
-        padding: 2rem 1.5rem; 
-        text-align: center; 
+
+    .blogs-header p {
+        margin: 0 auto;
+    }
+
+    .blogs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .featured-blog {
+        grid-column: auto;
+    }
+
+    .blog-image {
+        height: 220px;
+    }
+
+    .blog-content {
+        padding: 1.5rem;
+    }
+
+    .blog-meta {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.35rem;
     }
     
     .product-features { 
@@ -826,7 +918,9 @@ img {
 
 @media (max-width: 480px) {
     .hero-title { font-size: 1.8rem; }
-    .ps-content h2, .product-title, .final-cta h2, .wcu-header h2 { font-size: 1.7rem; }
+    .ps-content h2, .product-title, .final-cta h2, .blogs-header h2 { font-size: 1.7rem; }
     .hero-background { display: none; }
     .product-glow { display: none; }
+    .blogs-section::before { display: none; }
+    .blog-image { height: 190px; }
 }
